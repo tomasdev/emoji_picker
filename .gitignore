@@ -1,0 +1,4 @@
+.DS_Store
+dist
+bazel-out
+node_modules
