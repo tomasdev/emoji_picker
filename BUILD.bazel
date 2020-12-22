@@ -11,10 +11,10 @@ exports_files([
 
 concatjs_devserver(
     name = "devserver",
-    # entry_module = "emoji_picker/src/index",
-    # serving_path = "/all.js",
-    # deps = ["//src"],
-    deps = [":bundle.min"],
+    entry_module = "emoji_picker/src/index",
+    serving_path = "/bundle.min.js",
+    deps = ["//src"],
+    # deps = [":bundle.min"], # to test the output
     static_files = ["index.html"],
 )
 
