@@ -1,4 +1,46 @@
-# Add rules here to build your software
-# See https://docs.bazel.build/versions/master/build-ref.html#BUILD_files
+load("@npm//@bazel/rollup:index.bzl", "rollup_bundle")
+load("@npm//@bazel/terser:index.bzl", "terser_minified")
+load("@npm//@bazel/concatjs:index.bzl", "concatjs_devserver")
+load("@npm//google-closure-compiler:index.bzl", "google_closure_compiler")
 
+package(default_visibility = ["//visibility:public"])
 
+exports_files([
+    "tsconfig.json",
+])
+
+concatjs_devserver(
+    name = "devserver",
+    # entry_module = "emoji_picker/src/index",
+    # serving_path = "/all.js",
+    # deps = ["//src"],
+    deps = [":bundle.min"],
+    static_files = ["index.html"],
+)
+
+rollup_bundle(
+    name = "bundle",
+    config_file = "rollup.config.js",
+    entry_point = "//src:index.ts",
+    deps = [
+        "//src",
+        "@npm//@rollup/plugin-commonjs",
+        "@npm//@rollup/plugin-node-resolve",
+    ],
+)
+
+terser_minified(
+    name = "bundle.min",
+    src = ":bundle",
+)
+
+google_closure_compiler(
+    name = "closure",
+    outs = ["bundle-cc.js"],
+    args = [
+        "--platform=native",
+        "--js=$(execpath :bundle)",
+        "--js_output_file=$@",
+    ],
+    data = [":bundle"],
+)

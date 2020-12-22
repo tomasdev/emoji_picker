@@ -1,14 +1,23 @@
 {
-    "name": "emoji_picker",
-    "version": "0.1.0",
-    "private": true,
-    "devDependencies": {
-        "@bazel/bazelisk": "latest",
-        "@bazel/ibazel": "latest",
-        "@bazel/buildifier": "latest"
-    },
-    "scripts": {
-        "build": "bazel build //...",
-        "test": "bazel test //..."
-    }
+  "name": "emoji_picker",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "@bazel/bazelisk": "latest",
+    "@bazel/buildifier": "latest",
+    "@bazel/concatjs": "^3.0.0-rc.0",
+    "@bazel/ibazel": "latest",
+    "@bazel/rollup": "^3.0.0-rc.0",
+    "@bazel/terser": "^3.0.0-rc.0",
+    "@bazel/typescript": "^3.0.0-rc.0",
+    "@rollup/plugin-commonjs": "^14.0.0",
+    "@rollup/plugin-node-resolve": "^8.4.0",
+    "google-closure-compiler": "^20201207.0.0",
+    "rollup": "^1.20.3",
+    "terser": "^4.3.1",
+    "typescript": "^3.6.3"
+  },
+  "scripts": {
+    "test": "bazel test..."
+  }
 }
